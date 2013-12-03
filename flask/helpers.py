@@ -572,6 +572,8 @@ def safe_join(directory, filename):
              would fall out of `directory`.
     """
     filename = posixpath.normpath(filename)
+    if not os.path.isabs(directory):
+        directory = os.path.join(current_app.root_path, directory)
     for sep in _os_alt_seps:
         if sep in filename:
             raise NotFound()
